@@ -50,6 +50,7 @@ You're reading it!
   3. Complete Exercise 3 Steps.  Features extracted and SVM trained.  Object recognition implemented.
   
   Each of the three exercises were completed to process the incoming RGB-D data stream from the virtual camera in the gazebo simulator.
+  The pipeline was fully implemented in the project submission python file: [project_template.py](/pr2_robot/scripts/project_template.py)
   The following images demonstrate the process of the data processing pipeline necessary for performing object recognition from a raw, noisy data stream:
   
   The environment:
@@ -62,26 +63,25 @@ You're reading it!
   
   The point cloud after filtering out the noise using make_statistical_outlier_filter(), Voxel Grid Downsampling (resolution reduction), Passthrough Filtering (cropping in Z and Y axes), and RANSAC plane segmentation (removing those points that together resemble a plane):
   
-  ![noise filtered out][image4]
+  ![filtered cloud][image4]
   
   The point cloud made into indexable clusters using make_EuclidianClusterExtraction():
   
-  ![filtered cloud][image5]
+  ![clustered cloud][image5]
   
-  Object recognition performed on the final filtered/clustered RGB-D point cloud data using Support Vector Classification:
+  Object recognition performed on the final filtered/clustered RGB-D point cloud data using Support Vector Classification (SVC):
   
-  ![clustered cloud][image6]
+  ![objects recognized][image6]
   
-  Object recognition performed on the final filtered/clustered RGB-D point cloud data using Support Vector Classification:
+  Outside of this pipeline a training set of RGB-D data was generated for a catalog of objects and used to train a SVC model that could be used in the pipeline for the object recognition step. The training set was generatedin part by the modified [capture_features_pr2.py](/capture_features_pr2) script and the model was trained and evaluated using the modified [train_svm_pr2.py](/train_svm_pr2.py) script. The scoring of the model generated the following confusion matrix for the cataloged objects:
   
-  ![object recognition][image7]
+  ![confusion matrix][image8]
 
 ### Pick and Place Setup
 
 #### 1. For all three tabletop setups (`test*.world`), perform object recognition, then read in respective pick list (`pick_list_*.yaml`). Next construct the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
 
-And here's another image! 
-![demo-2](https://user-images.githubusercontent.com/20687560/28748286-9f65680e-7468-11e7-83dc-f1a32380b89c.png)
+
 
 Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
 
