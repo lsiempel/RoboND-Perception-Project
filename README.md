@@ -1,8 +1,18 @@
 ## Project: Perception Pick & Place
-### Writeup Template: You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+### Project 2 submission by Lewis Siempelkamp for Udacity's Robotics NanoDegree Term 1 
+### February 2019
 
 ---
+[//]: # (Image References)
 
+[image1]: ./images/default_gzclient_camera(1)-2019-02-24T00_02_38.452216.jpg
+[image2]: ./images/rviz_screenshot_2019_02_23-23_57_53.png
+[image3]: ./images/rviz_screenshot_2019_02_23-23_58_34.png
+[image4]: ./images/rviz_screenshot_2019_02_24-00_00_22.png
+[image5]: ./images/rviz_screenshot_2019_02_24-00_00_44.png
+[image6]: ./images/rviz_screenshot_2019_02_24-00_01_24.png
+[image7]: ./images/rviz_screenshot_2019_02_24-00_03_37.png
+[image8]: ./images/figure_2-2.png
 
 # Required Steps for a Passing Submission:
 1. Extract features and train an SVM model on new objects (see `pick_list_*.yaml` in `/pr2_robot/config/` for the list of models you'll be trying to identify). 
@@ -35,14 +45,24 @@
 You're reading it!
 
 ### Exercise 1, 2 and 3 pipeline implemented
-#### 1. Complete Exercise 1 steps. Pipeline for filtering and RANSAC plane fitting implemented.
-
-#### 2. Complete Exercise 2 steps: Pipeline including clustering for segmentation implemented.  
-
-#### 2. Complete Exercise 3 Steps.  Features extracted and SVM trained.  Object recognition implemented.
-Here is an example of how to include an image in your writeup.
-
-![demo-1](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+  1. Complete Exercise 1 steps. Pipeline for filtering and RANSAC plane fitting implemented
+  2. Complete Exercise 2 steps: Pipeline including clustering for segmentation implemented.  
+  3. Complete Exercise 3 Steps.  Features extracted and SVM trained.  Object recognition implemented.
+  
+  Each of the three exercises were completed to process the incoming RGB-D data stream from the virtual camera in the gazebo simulator.
+  The following images demonstrate the process of the data processing pipeline necessary for performing object recognition from a raw, noisy data stream:
+  The environment:
+  ![the environment](image2)
+  The point cloud from the raw, noisy RGB-D data stream of the environment:
+  ![raw RGB-D](image3)
+  The point cloud after filtering out the noise using make_statistical_outlier_filter():
+  ![noise filtered out](image4)
+  The point cloud after Voxel Grid Downsampling (resolution reduction), Passthrough Filtering (cropping in Z and Y axes), and RANSAC plane segmentation (removing those points that together resemble a plane):
+  ![filtered cloud](image5)
+  The point cloud made into indexable clusters using make_EuclidianClusterExtraction():
+  ![clustered cloud](image6)
+  Object recognition performed on the final filtered/clustered RGB-D point cloud data using Support Vector Classification:
+  ![object recognition](image7)
 
 ### Pick and Place Setup
 
