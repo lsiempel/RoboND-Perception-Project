@@ -60,15 +60,15 @@ You're reading it!
   
   ![raw RGB-D][image3]
   
-  The point cloud after filtering out the noise using make_statistical_outlier_filter():
+  The point cloud after filtering out the noise using make_statistical_outlier_filter(), Voxel Grid Downsampling (resolution reduction), Passthrough Filtering (cropping in Z and Y axes), and RANSAC plane segmentation (removing those points that together resemble a plane):
   
   ![noise filtered out][image4]
   
-  The point cloud after Voxel Grid Downsampling (resolution reduction), Passthrough Filtering (cropping in Z and Y axes), and RANSAC plane segmentation (removing those points that together resemble a plane):
+  The point cloud made into indexable clusters using make_EuclidianClusterExtraction():
   
   ![filtered cloud][image5]
   
-  The point cloud made into indexable clusters using make_EuclidianClusterExtraction():
+  Object recognition performed on the final filtered/clustered RGB-D point cloud data using Support Vector Classification:
   
   ![clustered cloud][image6]
   
