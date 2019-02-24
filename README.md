@@ -54,27 +54,27 @@ You're reading it!
   
   The environment:
   
-  ![the environment](image2)
+  ![the environment][image2]
   
   The point cloud from the raw, noisy RGB-D data stream of the environment:
   
-  ![raw RGB-D](image3)
+  ![raw RGB-D][image3]
   
   The point cloud after filtering out the noise using make_statistical_outlier_filter():
   
-  ![noise filtered out](image4)
+  ![noise filtered out][image4]
   
   The point cloud after Voxel Grid Downsampling (resolution reduction), Passthrough Filtering (cropping in Z and Y axes), and RANSAC plane segmentation (removing those points that together resemble a plane):
   
-  ![filtered cloud](image5)
+  ![filtered cloud][image5]
   
   The point cloud made into indexable clusters using make_EuclidianClusterExtraction():
   
-  ![clustered cloud](image6)
+  ![clustered cloud][image6]
   
   Object recognition performed on the final filtered/clustered RGB-D point cloud data using Support Vector Classification:
   
-  ![object recognition](image7)
+  ![object recognition][image7]
 
 ### Pick and Place Setup
 
