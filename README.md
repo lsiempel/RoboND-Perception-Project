@@ -13,6 +13,7 @@
 [image6]: ./images/rviz_screenshot_2019_02_24-00_01_24.png
 [image7]: ./images/rviz_screenshot_2019_02_24-00_03_37.png
 [image8]: ./images/figure_2-2.png
+[image9]: ./images/rviz_screenshot_2019_02_24-01_01_57.png
 
 # Required Steps for a Passing Submission:
 1. Extract features and train an SVM model on new objects (see `pick_list_*.yaml` in `/pr2_robot/config/` for the list of models you'll be trying to identify). 
@@ -73,7 +74,7 @@ You're reading it!
   
   ![objects recognized][image6]
   
-  Outside of this pipeline a training set of RGB-D data was generated for a catalog of objects and used to train a SVC model that could be used in the pipeline for the object recognition step. The training set was generatedin part by the modified [capture_features_pr2.py](/capture_features_pr2) script and the model was trained and evaluated using the modified [train_svm_pr2.py](/train_svm_pr2.py) script. The scoring of the model generated the following confusion matrix for the cataloged objects:
+  Outside of this pipeline a training set of RGB-D data was generated for a catalog of objects and used to train a SVC model that could be used in the pipeline for the object recognition step. The training set was generatedin part by the modified [capture_features_pr2.py](/capture_features_pr2) script and the model was trained and evaluated using the modified [train_svm_pr2.py](/train_svm_pr2.py) script. The scoring of the model generated the following confusion matrix for the cataloged objects displaying a fairly robust model:
   
   ![confusion matrix][image8]
 
@@ -81,9 +82,15 @@ You're reading it!
 
 #### 1. For all three tabletop setups (`test*.world`), perform object recognition, then read in respective pick list (`pick_list_*.yaml`). Next construct the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
 
+The pipeline shown above was implemented in the [project_template.py](/pr2_robot/scripts/project_template.py) script which subscribes to the RGB-D datastream, pulling in raw point cloud data, pumpes it through the processing pipeline, publishes the processed data back to the ROS server, and packages a request to the pick_place_routine for each identified object. Upon receiving the request the pick_place_routine the PR2 robot has the information it needs to identify and locate each object in its pick list.
 
+The PR2 robot was spawned in 3 different 'worlds', each with a different assortment of objects that it must identify and bin according to its pick list.
 
-Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
+This implementation of the [project_template.py](/pr2_robot/scripts/project_template.py) script with the SVM model created above results in near 100% accuracy for all 'worlds' that it was run in.
 
+The output_X.yaml files generated for each world can be seen at the root of this repo verifying the validity of this script.
+
+![object recognition][image7]
+![pick_place_routine][image9]
 
 
